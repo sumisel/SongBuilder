@@ -1,28 +1,124 @@
-/*
- * Empty Stylesheet file.
- */
-
 .mainFxmlClass {
 
 }
 
-.playButton {
-  -fx-background-image: url("../res/play_32.png");
-  -fx-background-color: yellowgreen;
-  -fx-background-radius: 32;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: 50%;
+.label {
 }
 
-.playButton.small {
-  -fx-background-radius: 16;
-  -fx-background-image: url("../res/play_16.png");
+/*
+ * player pane elements
+ */
+
+#panePlayer {
+    -fx-background-color: 
+        linear-gradient(#f2f2f2, #d6d6d6),
+        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+        linear-gradient(#dddddd 0%, #f6f6f6 50%);
 }
 
-.playButton.paused {
-  -fx-background-image: url("../res/pause_32.png");
-  -fx-background-color: greenyellow;
-  -fx-background-radius: 32;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: 50%;
+.play-button {
+    -fx-background-image: url("../res/play_32.png");
+    -fx-background-color: yellowgreen;
+    -fx-background-radius: 32;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+.play-button.pause {
+    -fx-background-image: url("../res/pause_32.png");
+    -fx-background-color: greenyellow;
+}
+
+.slider > .thumb {
+    -fx-background-color: greenyellow;
+    -fx-border-radius: 10;
+    -fx-border-color: yellowgreen;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
+
+.slider > .track {
+    -fx-border-radius: 10;
+    -fx-border-color: yellowgreen;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
+
+
+/*
+ * verses list pane elements
+ */
+
+#VBoxVerses {
+    -fx-spacing: 5;
+    -fx-padding: 5;
+}
+
+.verse-pane {
+    -fx-padding: 10;
+    -fx-background-color: 
+        linear-gradient(#f2f2f2, #d6d6d6),
+        linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+        linear-gradient(#dddddd 0%, #f6f6f6 50%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.verse-index{
+    -fx-font-size: large;
+    -fx-font-weight: bold;
+}
+
+.play-button-small {
+    -fx-background-image: url("../res/play_16.png");
+    -fx-background-color: yellowgreen;
+    -fx-background-radius: 16;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+.play-button-small.pause {
+    -fx-background-image: url("../res/pause_16.png");
+    -fx-background-color: greenyellow;
+}
+
+
+/*
+ * main song pane elements
+ */
+
+#VBoxMain {
+    -fx-padding: 5;
+    -fx-spacing: 2;
+}
+
+.headline {
+    -fx-padding: 10;
+    -fx-font-size: xx-large;
+    -fx-font-weight: bold;
+}
+
+.save-button {
+    -fx-background-image: url("../res/save_32.png");
+    -fx-background-color: transparent;
+}
+
+.verse-slot {
+    -fx-padding: 10;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+}
+
+.verse-slot.empty {
+    -fx-padding: 10;
+    -fx-background-color: lightgray;
+    -fx-opacity: 0.4;
+}
+
+.fixed-element {
+    -fx-padding: 10;
+    -fx-background-color: transparent;
 }
