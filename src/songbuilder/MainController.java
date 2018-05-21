@@ -30,6 +30,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * FXML Controller class
@@ -137,6 +139,15 @@ public class MainController implements Initializable {
     @FXML
     private Button playButtonVerse21;
 
+    @FXML
+    private Button playButtonIntro;
+    @FXML
+    private Button playButtonRefrain1;
+    @FXML
+    private Button playButtonRefrain2;
+    @FXML
+    private Button playButtonRefrain3;
+
     /**
      * Initialises the controller class.
      */
@@ -147,7 +158,42 @@ public class MainController implements Initializable {
     }
     
     private void initButtons() {
-        
+        setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\1.mp3");
+        setOnPlay(playButtonVerse02, System.getProperty("user.dir")+"\\src\\res\\2.mp3");
+        setOnPlay(playButtonVerse03, System.getProperty("user.dir")+"\\src\\res\\3.mp3");
+        setOnPlay(playButtonVerse04, System.getProperty("user.dir")+"\\src\\res\\4.mp3");
+        setOnPlay(playButtonVerse05, System.getProperty("user.dir")+"\\src\\res\\5.mp3");
+        setOnPlay(playButtonVerse06, System.getProperty("user.dir")+"\\src\\res\\6.mp3");
+        setOnPlay(playButtonVerse07, System.getProperty("user.dir")+"\\src\\res\\7.mp3");
+        setOnPlay(playButtonVerse08, System.getProperty("user.dir")+"\\src\\res\\8.mp3");
+        setOnPlay(playButtonVerse09, System.getProperty("user.dir")+"\\src\\res\\9.mp3");
+        setOnPlay(playButtonVerse10, System.getProperty("user.dir")+"\\src\\res\\10.mp3");
+        setOnPlay(playButtonVerse11, System.getProperty("user.dir")+"\\src\\res\\11.mp3");
+        setOnPlay(playButtonVerse12, System.getProperty("user.dir")+"\\src\\res\\12.mp3");
+        setOnPlay(playButtonVerse13, System.getProperty("user.dir")+"\\src\\res\\13.mp3");
+        setOnPlay(playButtonVerse14, System.getProperty("user.dir")+"\\src\\res\\14.mp3");
+        setOnPlay(playButtonVerse15, System.getProperty("user.dir")+"\\src\\res\\15.mp3");
+        setOnPlay(playButtonVerse16, System.getProperty("user.dir")+"\\src\\res\\16.mp3");
+        setOnPlay(playButtonVerse17, System.getProperty("user.dir")+"\\src\\res\\17.mp3");
+        setOnPlay(playButtonVerse18, System.getProperty("user.dir")+"\\src\\res\\18.mp3");
+        setOnPlay(playButtonVerse19, System.getProperty("user.dir")+"\\src\\res\\19.mp3");
+        setOnPlay(playButtonVerse20, System.getProperty("user.dir")+"\\src\\res\\20.mp3");
+        setOnPlay(playButtonVerse21, System.getProperty("user.dir")+"\\src\\res\\21.mp3");
+
+        setOnPlay(playButtonIntro, System.getProperty("user.dir")+"\\src\\res\\intro.mp3");
+        setOnPlay(playButtonRefrain1, System.getProperty("user.dir")+"\\src\\res\\refrain1.mp3");
+        setOnPlay(playButtonRefrain2, System.getProperty("user.dir")+"\\src\\res\\refrain2.mp3");
+        setOnPlay(playButtonRefrain3, System.getProperty("user.dir")+"\\src\\res\\refrain3.mp3");
+    }
+    
+    private void setOnPlay(Button button, String res) {
+        //final URL resource = getClass().getResource(res);
+        final Media media = new Media((new File(res)).toURI().toString());
+        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        button.setOnAction(e ->{
+            mediaPlayer.stop();
+            mediaPlayer.play();
+        });
     }
     
     private void initVerseTexts() {

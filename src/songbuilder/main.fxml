@@ -33,7 +33,7 @@
                 <GridPane fx:id="intro" prefHeight="100.0" styleClass="fixed-element">
                   <children>
                     <Label styleClass="verse-index" text="Intro" />
-                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Button fx:id="playButtonIntro" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textIntro" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
@@ -75,10 +75,10 @@
                     <RowConstraints vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane fx:id="refrain1" prefHeight="150.0" styleClass="fixed-element">
+                <GridPane fx:id="refrain1" prefHeight="230.0" styleClass="fixed-element">
                   <children>
                     <Label styleClass="verse-index" text="Refrain" />
-                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Button fx:id="playButtonRefrain1" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textRefrain1" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
@@ -120,10 +120,10 @@
                     <RowConstraints vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane fx:id="refrain2" prefHeight="150.0" styleClass="fixed-element">
+                <GridPane fx:id="refrain2" prefHeight="230.0" styleClass="fixed-element">
                   <children>
                     <Label styleClass="verse-index" text="Refrain" />
-                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Button fx:id="playButtonRefrain2" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textRefrain2" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
@@ -165,10 +165,10 @@
                     <RowConstraints vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane fx:id="refrain3" prefHeight="150.0" styleClass="fixed-element">
+                <GridPane fx:id="refrain3" prefHeight="230.0" styleClass="fixed-element">
                   <children>
                     <Label styleClass="verse-index" text="Refrain" />
-                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Button fx:id="playButtonRefrain3" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textRefrain3" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
