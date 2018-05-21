@@ -16,7 +16,7 @@
         <GridPane>
           <children>
             <Label styleClass="headline" text="Dein Unterschleißheim Lied" />
-            <Button minHeight="32.0" minWidth="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="save-button" GridPane.columnIndex="1" />
+            <Button fx:id="buttonSave" minHeight="32.0" minWidth="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="save-button" GridPane.columnIndex="1" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
@@ -513,7 +513,7 @@
       <children>
         <Button fx:id="buttonPlay" mnemonicParsing="false" prefWidth="32.0" styleClass="play-button" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="21.0" />
         <Slider fx:id="sliderPlayProgress" styleClass="slider" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
-        <Label fx:id="labelPlayProgress" text="00:00 / 03:45" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0" />
+        <Label fx:id="labelPlayProgress" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0" />
       </children>
     </AnchorPane>
   </children>

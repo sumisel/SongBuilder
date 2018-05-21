@@ -17,13 +17,12 @@
  */
 package songbuilder;
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.SequenceInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
@@ -40,7 +39,9 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import oracle.jrockit.jfr.events.ContentTypeImpl;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 
 /**
  * FXML Controller class
@@ -49,7 +50,18 @@ import oracle.jrockit.jfr.events.ContentTypeImpl;
  */
 public class MainController implements Initializable {
 
+    private String[] song = new String[10];
+    private boolean songComplete = false;
+
     // ugly code :(
+    
+    @FXML
+    private Button buttonPlay;
+    @FXML
+    private Label labelPlayProgress;
+    
+    @FXML
+    private Button buttonSave;
     
     @FXML
     private GridPane paneVerse1;
@@ -249,6 +261,21 @@ public class MainController implements Initializable {
         initVerseTexts();
         initButtons();
         initDragDrop();
+        initSong();
+        initPlayer();
+    }
+    
+    private void initSong() {
+        song[0] = "intro";
+        song[1] = "";
+        song[2] = "";
+        song[3] = "refrain1";
+        song[4] = "";
+        song[5] = "";
+        song[6] = "refrain2";
+        song[7] = "";
+        song[8] = "";
+        song[9] = "refrain3";
     }
     
     private void initDragDrop() {
@@ -330,9 +357,14 @@ public class MainController implements Initializable {
                 
                 ((Label) target.getChildren().get(0)).setText(db.getString());
                 ((Label) target.getChildren().get(2)).setText(db.getHtml());
-                setOnPlay(((Button) target.getChildren().get(1)), System.getProperty("user.dir")+"\\src\\res\\"+db.getString()+".mp3");
+                setOnPlay(((Button) target.getChildren().get(1)), System.getProperty("user.dir")+"\\src\\res\\"+db.getString()+".wav");
                 
-            success = true;
+                int index = Integer.parseInt(target.getId().replaceAll("[^0-9]+", ""));
+                index += (index-1)/2;
+                song[index] = db.getString();
+                initPlayer();
+                
+                success = true;
             }
             /* let the source know whether the string was successfully 
             * transferred and used */
@@ -358,36 +390,111 @@ public class MainController implements Initializable {
     }
         
     private void initButtons() {
-        setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\01.mp3");
-        setOnPlay(playButtonVerse02, System.getProperty("user.dir")+"\\src\\res\\02.mp3");
-        setOnPlay(playButtonVerse03, System.getProperty("user.dir")+"\\src\\res\\03.mp3");
-        setOnPlay(playButtonVerse04, System.getProperty("user.dir")+"\\src\\res\\04.mp3");
-        setOnPlay(playButtonVerse05, System.getProperty("user.dir")+"\\src\\res\\05.mp3");
-        setOnPlay(playButtonVerse06, System.getProperty("user.dir")+"\\src\\res\\06.mp3");
-        setOnPlay(playButtonVerse07, System.getProperty("user.dir")+"\\src\\res\\07.mp3");
-        setOnPlay(playButtonVerse08, System.getProperty("user.dir")+"\\src\\res\\08.mp3");
-        setOnPlay(playButtonVerse09, System.getProperty("user.dir")+"\\src\\res\\09.mp3");
-        setOnPlay(playButtonVerse10, System.getProperty("user.dir")+"\\src\\res\\10.mp3");
-        setOnPlay(playButtonVerse11, System.getProperty("user.dir")+"\\src\\res\\11.mp3");
-        setOnPlay(playButtonVerse12, System.getProperty("user.dir")+"\\src\\res\\12.mp3");
-        setOnPlay(playButtonVerse13, System.getProperty("user.dir")+"\\src\\res\\13.mp3");
-        setOnPlay(playButtonVerse14, System.getProperty("user.dir")+"\\src\\res\\14.mp3");
-        setOnPlay(playButtonVerse15, System.getProperty("user.dir")+"\\src\\res\\15.mp3");
-        setOnPlay(playButtonVerse16, System.getProperty("user.dir")+"\\src\\res\\16.mp3");
-        setOnPlay(playButtonVerse17, System.getProperty("user.dir")+"\\src\\res\\17.mp3");
-        setOnPlay(playButtonVerse18, System.getProperty("user.dir")+"\\src\\res\\18.mp3");
-        setOnPlay(playButtonVerse19, System.getProperty("user.dir")+"\\src\\res\\19.mp3");
-        setOnPlay(playButtonVerse20, System.getProperty("user.dir")+"\\src\\res\\20.mp3");
-        setOnPlay(playButtonVerse21, System.getProperty("user.dir")+"\\src\\res\\21.mp3");
+        // save button
+        //TODO file chooser and save wav
+        
+        setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\01.wav");
+        setOnPlay(playButtonVerse02, System.getProperty("user.dir")+"\\src\\res\\02.wav");
+        setOnPlay(playButtonVerse03, System.getProperty("user.dir")+"\\src\\res\\03.wav");
+        setOnPlay(playButtonVerse04, System.getProperty("user.dir")+"\\src\\res\\04.wav");
+        setOnPlay(playButtonVerse05, System.getProperty("user.dir")+"\\src\\res\\05.wav");
+        setOnPlay(playButtonVerse06, System.getProperty("user.dir")+"\\src\\res\\06.wav");
+        setOnPlay(playButtonVerse07, System.getProperty("user.dir")+"\\src\\res\\07.wav");
+        setOnPlay(playButtonVerse08, System.getProperty("user.dir")+"\\src\\res\\08.wav");
+        setOnPlay(playButtonVerse09, System.getProperty("user.dir")+"\\src\\res\\09.wav");
+        setOnPlay(playButtonVerse10, System.getProperty("user.dir")+"\\src\\res\\10.wav");
+        setOnPlay(playButtonVerse11, System.getProperty("user.dir")+"\\src\\res\\11.wav");
+        setOnPlay(playButtonVerse12, System.getProperty("user.dir")+"\\src\\res\\12.wav");
+        setOnPlay(playButtonVerse13, System.getProperty("user.dir")+"\\src\\res\\13.wav");
+        setOnPlay(playButtonVerse14, System.getProperty("user.dir")+"\\src\\res\\14.wav");
+        setOnPlay(playButtonVerse15, System.getProperty("user.dir")+"\\src\\res\\15.wav");
+        setOnPlay(playButtonVerse16, System.getProperty("user.dir")+"\\src\\res\\16.wav");
+        setOnPlay(playButtonVerse17, System.getProperty("user.dir")+"\\src\\res\\17.wav");
+        setOnPlay(playButtonVerse18, System.getProperty("user.dir")+"\\src\\res\\18.wav");
+        setOnPlay(playButtonVerse19, System.getProperty("user.dir")+"\\src\\res\\19.wav");
+        setOnPlay(playButtonVerse20, System.getProperty("user.dir")+"\\src\\res\\20.wav");
+        setOnPlay(playButtonVerse21, System.getProperty("user.dir")+"\\src\\res\\21.wav");
 
-        setOnPlay(playButtonIntro, System.getProperty("user.dir")+"\\src\\res\\intro.mp3");
-        setOnPlay(playButtonRefrain1, System.getProperty("user.dir")+"\\src\\res\\refrain1.mp3");
-        setOnPlay(playButtonRefrain2, System.getProperty("user.dir")+"\\src\\res\\refrain2.mp3");
-        setOnPlay(playButtonRefrain3, System.getProperty("user.dir")+"\\src\\res\\refrain3.mp3");
+        setOnPlay(playButtonIntro, System.getProperty("user.dir")+"\\src\\res\\intro.wav");
+        setOnPlay(playButtonRefrain1, System.getProperty("user.dir")+"\\src\\res\\refrain1.wav");
+        setOnPlay(playButtonRefrain2, System.getProperty("user.dir")+"\\src\\res\\refrain2.wav");
+        setOnPlay(playButtonRefrain3, System.getProperty("user.dir")+"\\src\\res\\refrain3.wav");
+    }
+    
+    private void initPlayer() {
+        for(int i=0; i<song.length; i++) {
+            if(song[i].equals("")) {
+                songComplete = false;
+                break;
+            }
+            songComplete = true;
+        }
+                
+        try {
+            AudioInputStream clipIntro = AudioSystem.getAudioInputStream(new File(System.getProperty("user.dir")+"\\src\\res\\"+song[0]+".wav"));
+            
+            int index = 1;
+            index = getNextSongSlot(index);
+            AudioInputStream clipNext = AudioSystem.getAudioInputStream(new File(System.getProperty("user.dir")+"\\src\\res\\"+song[index]+".wav"));
+            index++;
+
+            AudioInputStream appendedFiles = 
+                            new AudioInputStream(
+                                new SequenceInputStream(clipIntro, clipNext),     
+                                clipIntro.getFormat(), 
+                                clipIntro.getFrameLength() + clipNext.getFrameLength());
+            
+            while(index < song.length) {
+                index = getNextSongSlot(index);
+                clipNext = AudioSystem.getAudioInputStream(new File(System.getProperty("user.dir")+"\\src\\res\\"+song[index]+".wav"));
+                index++;
+
+                appendedFiles = 
+                            new AudioInputStream(
+                                new SequenceInputStream(appendedFiles, clipNext),     
+                                appendedFiles.getFormat(), 
+                                appendedFiles.getFrameLength() + clipNext.getFrameLength());
+            }
+
+            int length = (int)((appendedFiles.getFrameLength())/(appendedFiles.getFormat().getFrameRate()));
+            String seconds = ""+(length%60);
+            seconds = seconds.length()==1 ? "0"+seconds : seconds;
+            String minutes = ""+(length/60);
+            minutes = minutes.length()==1 ? "0"+minutes : minutes;
+            labelPlayProgress.setText(minutes+":"+seconds);
+
+            AudioSystem.write(appendedFiles, 
+                            AudioFileFormat.Type.WAVE,
+                            new File(System.getProperty("user.dir")+"\\src\\res\\song.wav"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        final Media media = new Media((new File(System.getProperty("user.dir")+"\\src\\res\\song.wav")).toURI().toString());
+        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        buttonPlay.setOnAction(e ->{
+            if(buttonPlay.getStyleClass().size()>2) {
+                mediaPlayer.pause();
+                buttonPlay.getStyleClass().remove(2);
+            } else {
+                mediaPlayer.play();
+                buttonPlay.getStyleClass().add("pause");
+            }
+        });
+        
+        //TODO init progress bar
+    }
+    
+    private int getNextSongSlot(int index) {
+        while(index < song.length && song[index].equals("")) {
+                index++;
+            }
+        
+        return index;
     }
     
     private void setOnPlay(Button button, String res) {
-        //final URL resource = getClass().getResource(res);
         final Media media = new Media((new File(res)).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         button.setOnAction(e ->{
