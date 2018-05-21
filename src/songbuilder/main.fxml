@@ -45,11 +45,11 @@
                     <RowConstraints vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
-                <GridPane fx:id="paneSlot1" prefHeight="100.0" styleClass="verse-slot">
+                <GridPane fx:id="paneSlot1" prefHeight="100.0" styleClass="verse-slot, empty">
                   <children>
-                    <Label fx:id="labelVerse1" styleClass="verse-index" text="01" />
+                    <Label fx:id="labelVerse1" styleClass="verse-index" />
                     <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                    <Label fx:id="textVerse1" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                    <Label fx:id="textVerse1" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
@@ -62,7 +62,7 @@
                 </GridPane>
                 <GridPane fx:id="paneSlot2" prefHeight="100.0" styleClass="verse-slot, empty">
                   <children>
-                    <Label fx:id="labelVerse2" styleClass="verse-index" text="second verse" />
+                    <Label fx:id="labelVerse2" styleClass="verse-index" />
                     <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textVerse2" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
@@ -92,7 +92,7 @@
                 </GridPane>
                 <GridPane fx:id="paneSlot3" prefHeight="100.0" styleClass="verse-slot, empty">
                   <children>
-                    <Label fx:id="labelVerse3" styleClass="verse-index" text="third verse" />
+                    <Label fx:id="labelVerse3" styleClass="verse-index" />
                     <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textVerse3" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
@@ -107,7 +107,7 @@
                 </GridPane>
                 <GridPane fx:id="paneSlot4" prefHeight="100.0" styleClass="verse-slot, empty">
                   <children>
-                    <Label fx:id="labelVerse4" styleClass="verse-index" text="fourth verse" />
+                    <Label fx:id="labelVerse4" styleClass="verse-index" />
                     <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textVerse4" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
@@ -137,7 +137,7 @@
                 </GridPane>
                 <GridPane fx:id="paneSlot5" prefHeight="100.0" styleClass="verse-slot, empty">
                   <children>
-                    <Label fx:id="labelVerse5" styleClass="verse-index" text="fifth verse" />
+                    <Label fx:id="labelVerse5" styleClass="verse-index" />
                     <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textVerse5" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>
@@ -152,7 +152,7 @@
                 </GridPane>
                 <GridPane fx:id="paneSlot6" prefHeight="100.0" styleClass="verse-slot, empty">
                   <children>
-                    <Label fx:id="labelVerse6" styleClass="verse-index" text="sixth verse" />
+                    <Label fx:id="labelVerse6" styleClass="verse-index" />
                     <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                     <Label fx:id="textVerse6" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                   </children>

@@ -17,6 +17,7 @@
  */
 package songbuilder;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,12 +27,20 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import oracle.jrockit.jfr.events.ContentTypeImpl;
 
 /**
  * FXML Controller class
@@ -42,6 +51,48 @@ public class MainController implements Initializable {
 
     // ugly code :(
     
+    @FXML
+    private GridPane paneVerse1;
+    @FXML
+    private GridPane paneVerse2;
+    @FXML
+    private GridPane paneVerse3;
+    @FXML
+    private GridPane paneVerse4;
+    @FXML
+    private GridPane paneVerse5;
+    @FXML
+    private GridPane paneVerse6;
+    @FXML
+    private GridPane paneVerse7;
+    @FXML
+    private GridPane paneVerse8;
+    @FXML
+    private GridPane paneVerse9;
+    @FXML
+    private GridPane paneVerse10;
+    @FXML
+    private GridPane paneVerse11;
+    @FXML
+    private GridPane paneVerse12;
+    @FXML
+    private GridPane paneVerse13;
+    @FXML
+    private GridPane paneVerse14;
+    @FXML
+    private GridPane paneVerse15;
+    @FXML
+    private GridPane paneVerse16;
+    @FXML
+    private GridPane paneVerse17;
+    @FXML
+    private GridPane paneVerse18;
+    @FXML
+    private GridPane paneVerse19;
+    @FXML
+    private GridPane paneVerse20;
+    @FXML
+    private GridPane paneVerse21;
     
     @FXML
     private Label textVerse01;
@@ -148,6 +199,48 @@ public class MainController implements Initializable {
     @FXML
     private Button playButtonRefrain3;
 
+    
+    @FXML
+    private GridPane paneSlot1;
+    @FXML
+    private GridPane paneSlot2;
+    @FXML
+    private GridPane paneSlot3;
+    @FXML
+    private GridPane paneSlot4;
+    @FXML
+    private GridPane paneSlot5;
+    @FXML
+    private GridPane paneSlot6;
+    
+    @FXML
+    private Label labelVerse1;
+    @FXML
+    private Label labelVerse2;
+    @FXML
+    private Label labelVerse3;
+    @FXML
+    private Label labelVerse4;
+    @FXML
+    private Label labelVerse5;
+    @FXML
+    private Label labelVerse6;
+    
+    @FXML
+    private Label textVerse1;
+    @FXML
+    private Label textVerse2;
+    @FXML
+    private Label textVerse3;
+    @FXML
+    private Label textVerse4;
+    @FXML
+    private Label textVerse5;
+    @FXML
+    private Label textVerse6;
+    
+    
+    
     /**
      * Initialises the controller class.
      */
@@ -155,18 +248,125 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initVerseTexts();
         initButtons();
+        initDragDrop();
     }
     
+    private void initDragDrop() {
+        addDragSource(paneVerse1);
+        addDragSource(paneVerse2);
+        addDragSource(paneVerse3);
+        addDragSource(paneVerse4);
+        addDragSource(paneVerse5);
+        addDragSource(paneVerse6);
+        addDragSource(paneVerse7);
+        addDragSource(paneVerse8);
+        addDragSource(paneVerse9);
+        addDragSource(paneVerse10);
+        addDragSource(paneVerse11);
+        addDragSource(paneVerse12);
+        addDragSource(paneVerse13);
+        addDragSource(paneVerse14);
+        addDragSource(paneVerse15);
+        addDragSource(paneVerse16);
+        addDragSource(paneVerse17);
+        addDragSource(paneVerse18);
+        addDragSource(paneVerse19);
+        addDragSource(paneVerse20);
+        addDragSource(paneVerse21);
+
+        addDropTarget(paneSlot1);
+        addDropTarget(paneSlot2);
+        addDropTarget(paneSlot3);
+        addDropTarget(paneSlot4);
+        addDropTarget(paneSlot5);
+        addDropTarget(paneSlot6);
+    }
+    
+    private void addDragSource(GridPane source) {
+        source.setOnDragDetected(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                /* drag was detected, start a drag-and-drop gesture*/
+                /* allow any transfer mode */
+                Dragboard db = source.startDragAndDrop(TransferMode.COPY.ANY);
+        
+                /* Put a string on a dragboard */
+                ClipboardContent content = new ClipboardContent();
+                content.putString(((Label) source.getChildren().get(0)).getText());
+                content.putHtml(((Label) source.getChildren().get(2)).getText());
+                
+                db.setContent(content);
+        
+                event.consume();
+            }
+        });
+    }
+    
+    private void addDropTarget(GridPane target) {
+        target.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data is dragged over the target */
+                /* accept it only if it is not dragged from the same node 
+                 * and if it has a string data */
+                if (event.getGestureSource() != target &&
+                    event.getDragboard().hasString()) {
+                        /* allow for both copying and moving, whatever user chooses */
+                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                    }
+        
+                    event.consume();
+                }
+            });
+        
+        target.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+            /* data dropped */
+            /* if there is a string data on dragboard, read it and use it */
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasString()) {
+                if(target.getStyleClass().size()>1) {
+                    target.getStyleClass().remove(1);
+                }
+                
+                ((Label) target.getChildren().get(0)).setText(db.getString());
+                ((Label) target.getChildren().get(2)).setText(db.getHtml());
+                setOnPlay(((Button) target.getChildren().get(1)), System.getProperty("user.dir")+"\\src\\res\\"+db.getString()+".mp3");
+                
+            success = true;
+            }
+            /* let the source know whether the string was successfully 
+            * transferred and used */
+            event.setDropCompleted(success);
+        
+            event.consume();
+            }
+        });
+        
+        
+        target.setOnDragEntered(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* the drag-and-drop gesture entered the target */
+                /* show to the user that it is an actual gesture target */
+                if (event.getGestureSource() != target &&
+                 event.getDragboard().hasString()) {
+                    // nothing implemented here
+                }
+                
+                event.consume();
+            }
+        });
+    }
+        
     private void initButtons() {
-        setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\1.mp3");
-        setOnPlay(playButtonVerse02, System.getProperty("user.dir")+"\\src\\res\\2.mp3");
-        setOnPlay(playButtonVerse03, System.getProperty("user.dir")+"\\src\\res\\3.mp3");
-        setOnPlay(playButtonVerse04, System.getProperty("user.dir")+"\\src\\res\\4.mp3");
-        setOnPlay(playButtonVerse05, System.getProperty("user.dir")+"\\src\\res\\5.mp3");
-        setOnPlay(playButtonVerse06, System.getProperty("user.dir")+"\\src\\res\\6.mp3");
-        setOnPlay(playButtonVerse07, System.getProperty("user.dir")+"\\src\\res\\7.mp3");
-        setOnPlay(playButtonVerse08, System.getProperty("user.dir")+"\\src\\res\\8.mp3");
-        setOnPlay(playButtonVerse09, System.getProperty("user.dir")+"\\src\\res\\9.mp3");
+        setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\01.mp3");
+        setOnPlay(playButtonVerse02, System.getProperty("user.dir")+"\\src\\res\\02.mp3");
+        setOnPlay(playButtonVerse03, System.getProperty("user.dir")+"\\src\\res\\03.mp3");
+        setOnPlay(playButtonVerse04, System.getProperty("user.dir")+"\\src\\res\\04.mp3");
+        setOnPlay(playButtonVerse05, System.getProperty("user.dir")+"\\src\\res\\05.mp3");
+        setOnPlay(playButtonVerse06, System.getProperty("user.dir")+"\\src\\res\\06.mp3");
+        setOnPlay(playButtonVerse07, System.getProperty("user.dir")+"\\src\\res\\07.mp3");
+        setOnPlay(playButtonVerse08, System.getProperty("user.dir")+"\\src\\res\\08.mp3");
+        setOnPlay(playButtonVerse09, System.getProperty("user.dir")+"\\src\\res\\09.mp3");
         setOnPlay(playButtonVerse10, System.getProperty("user.dir")+"\\src\\res\\10.mp3");
         setOnPlay(playButtonVerse11, System.getProperty("user.dir")+"\\src\\res\\11.mp3");
         setOnPlay(playButtonVerse12, System.getProperty("user.dir")+"\\src\\res\\12.mp3");
