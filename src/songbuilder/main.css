@@ -3,6 +3,7 @@
 }
 
 .label {
+    -fx-font-size: 18;
 }
 
 
@@ -45,6 +46,11 @@
     -fx-border-width: 2;
 }
 
+#logo {
+    -fx-background-image: url("../res/logo.png");
+    -fx-alignment: center;
+}
+
 
 /*
  * verses list pane elements
@@ -67,7 +73,7 @@
 }
 
 .verse-index{
-    -fx-font-size: large;
+    -fx-font-size: 20;
     -fx-font-weight: bold;
 }
 
@@ -96,7 +102,7 @@
 
 .headline {
     -fx-padding: 10;
-    -fx-font-size: xx-large;
+    -fx-font-size: 40;
     -fx-font-weight: bold;
 }
 

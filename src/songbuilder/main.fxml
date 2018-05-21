@@ -5,222 +5,524 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?scenebuilder-stylesheet main.css?>
 
-<GridPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songbuilder.MainController">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-      <ColumnConstraints hgrow="NEVER" minWidth="300.0" prefWidth="300.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="75.0" prefHeight="75.0" vgrow="NEVER" />
-   </rowConstraints>
-   <children>
-      <VBox>
-         <children>
-            <GridPane>
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" />
-                    <ColumnConstraints hgrow="NEVER" minWidth="50.0" prefWidth="50.0" />
-                </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-               </rowConstraints>
-                <children>
-                    <Label styleClass="headline" text="Your Song" />
-                    <Button minHeight="32" minWidth="32" mnemonicParsing="false" prefHeight="32" prefWidth="32" styleClass="save-button" GridPane.columnIndex="1" />
-                </children>
-            </GridPane>
-          <ScrollPane id="paneMain" fitToWidth="TRUE" prefHeight="2000">
-            <content>
-              <VBox id="VBoxMain">
-                     <children>
-                        <GridPane id="intro" prefHeight="75.0" styleClass="fixed-element">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label styleClass="verse-index" text="Intro" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textIntro" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="paneSlot1" prefHeight="75.0" styleClass="verse-slot">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label id="labelVerse1" styleClass="verse-index" text="01" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textVerse1" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="paneSlot2" prefHeight="75.0" styleClass="verse-slot, empty">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label id="labelVerse2" styleClass="verse-index" text="second verse" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textVerse2" text="" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="refrain1" prefHeight="75.0" styleClass="fixed-element">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label styleClass="verse-index" text="Refrain" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textRefrain1" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="paneSlot3" prefHeight="75.0" styleClass="verse-slot, empty">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label id="labelVerse3" styleClass="verse-index" text="third verse" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textVerse3" text="" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="paneSlot4" prefHeight="75.0" styleClass="verse-slot, empty">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label id="labelVerse4" styleClass="verse-index" text="fourth verse" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textVerse4" text="" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="refrain2" prefHeight="75.0" styleClass="fixed-element">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label styleClass="verse-index" text="Refrain" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textRefrain2" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="paneSlot5" prefHeight="75.0" styleClass="verse-slot, empty">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label id="labelVerse5" styleClass="verse-index" text="fifth verse" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textVerse5" text="" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="paneSlot6" prefHeight="75.0" styleClass="verse-slot, empty">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label id="labelVerse6" styleClass="verse-index" text="sixth verse" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textVerse6" text="" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <GridPane id="outro" prefHeight="75.0" styleClass="fixed-element">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                            <RowConstraints vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label styleClass="verse-index" text="Outro" />
-                              <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                              <Label id="textOutro" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </VBox>
-            </content>
-          </ScrollPane>
-         </children>
-      </VBox>
-    <ScrollPane id="paneVerses" fitToWidth="TRUE" prefHeight="2000" GridPane.columnIndex="1" GridPane.rowSpan="2">
-      <content>
-            <VBox id="VBoxVerses">
-               <children>
-                  <GridPane id="paneVerse1" prefHeight="100.0" styleClass="verse-pane">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints prefHeight="16.0" vgrow="NEVER" />
-                      <RowConstraints vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label id="labelVerse01" styleClass="verse-index" text="01" />
-                        <Button minHeight="16" mnemonicParsing="false" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                        <Label id="textVerse01" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="TRUE" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                     </children>
-                  </GridPane>
-               </children>
+<GridPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="songbuilder.MainController">
+  <children>
+    <VBox>
+      <children>
+        <GridPane>
+          <children>
+            <Label styleClass="headline" text="Dein Unterschleißheim Lied" />
+            <Button minHeight="32.0" minWidth="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="save-button" GridPane.columnIndex="1" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints hgrow="NEVER" minWidth="50.0" prefWidth="50.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints />
+          </rowConstraints>
+        </GridPane>
+        <ScrollPane fx:id="paneMain" fitToWidth="true" prefHeight="2000.0">
+          <content>
+            <VBox fx:id="VBoxMain">
+              <children>
+                <GridPane fx:id="intro" prefHeight="100.0" styleClass="fixed-element">
+                  <children>
+                    <Label styleClass="verse-index" text="Intro" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textIntro" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="paneSlot1" prefHeight="100.0" styleClass="verse-slot">
+                  <children>
+                    <Label fx:id="labelVerse1" styleClass="verse-index" text="01" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textVerse1" text="${'Song verse line 1 with a lot of text and even more words, this is still the first line \nSong Verse next line...'}" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="paneSlot2" prefHeight="100.0" styleClass="verse-slot, empty">
+                  <children>
+                    <Label fx:id="labelVerse2" styleClass="verse-index" text="second verse" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textVerse2" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="refrain1" prefHeight="150.0" styleClass="fixed-element">
+                  <children>
+                    <Label styleClass="verse-index" text="Refrain" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textRefrain1" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="paneSlot3" prefHeight="100.0" styleClass="verse-slot, empty">
+                  <children>
+                    <Label fx:id="labelVerse3" styleClass="verse-index" text="third verse" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textVerse3" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="paneSlot4" prefHeight="100.0" styleClass="verse-slot, empty">
+                  <children>
+                    <Label fx:id="labelVerse4" styleClass="verse-index" text="fourth verse" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textVerse4" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="refrain2" prefHeight="150.0" styleClass="fixed-element">
+                  <children>
+                    <Label styleClass="verse-index" text="Refrain" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textRefrain2" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="paneSlot5" prefHeight="100.0" styleClass="verse-slot, empty">
+                  <children>
+                    <Label fx:id="labelVerse5" styleClass="verse-index" text="fifth verse" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textVerse5" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="paneSlot6" prefHeight="100.0" styleClass="verse-slot, empty">
+                  <children>
+                    <Label fx:id="labelVerse6" styleClass="verse-index" text="sixth verse" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textVerse6" text="" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+                <GridPane fx:id="refrain3" prefHeight="150.0" styleClass="fixed-element">
+                  <children>
+                    <Label styleClass="verse-index" text="Refrain" />
+                    <Button minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                    <Label fx:id="textRefrain3" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                    <RowConstraints vgrow="SOMETIMES" />
+                  </rowConstraints>
+                </GridPane>
+              </children>
             </VBox>
+          </content>
+        </ScrollPane>
+      </children>
+    </VBox>
+    <ScrollPane fx:id="paneVerses" fitToWidth="true" prefHeight="2000.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
+      <content>
+        <VBox fx:id="VBoxVerses">
+          <children>
+            <GridPane fx:id="paneVerse1" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse01" styleClass="verse-index" text="01" />
+                <Button fx:id="playButtonVerse01" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse01" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse2" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse02" styleClass="verse-index" text="02" />
+                <Button fx:id="playButtonVerse02" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse02" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse3" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse03" styleClass="verse-index" text="03" />
+                <Button fx:id="playButtonVerse03" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse03" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse4" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse04" styleClass="verse-index" text="04" />
+                <Button fx:id="playButtonVerse04" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse04" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse5" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse05" styleClass="verse-index" text="05" />
+                <Button fx:id="playButtonVerse05" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse05" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse6" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse06" styleClass="verse-index" text="06" />
+                <Button fx:id="playButtonVerse06" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse06" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse7" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse07" styleClass="verse-index" text="07" />
+                <Button fx:id="playButtonVerse07" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse07" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse8" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse08" styleClass="verse-index" text="08" />
+                <Button fx:id="playButtonVerse08" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse08" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse9" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse09" styleClass="verse-index" text="09" />
+                <Button fx:id="playButtonVerse09" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse09" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse10" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse10" styleClass="verse-index" text="10" />
+                <Button fx:id="playButtonVerse10" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse10" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse11" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse11" styleClass="verse-index" text="11" />
+                <Button fx:id="playButtonVerse11" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse11" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse12" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse12" styleClass="verse-index" text="12" />
+                <Button fx:id="playButtonVerse12" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse12" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse13" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse13" styleClass="verse-index" text="13" />
+                <Button fx:id="playButtonVerse13" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse13" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse14" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse14" styleClass="verse-index" text="14" />
+                <Button fx:id="playButtonVerse14" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse14" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse15" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse15" styleClass="verse-index" text="15" />
+                <Button fx:id="playButtonVerse15" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse15" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse16" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse16" styleClass="verse-index" text="16" />
+                <Button fx:id="playButtonVerse16" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse16" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse17" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse17" styleClass="verse-index" text="17" />
+                <Button fx:id="playButtonVerse17" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse17" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse18" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse18" styleClass="verse-index" text="18" />
+                <Button fx:id="playButtonVerse18" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse18" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse19" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse19" styleClass="verse-index" text="19" />
+                <Button fx:id="playButtonVerse19" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse19" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse20" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse20" styleClass="verse-index" text="20" />
+                <Button fx:id="playButtonVerse20" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse20" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="paneVerse21" prefHeight="150.0" styleClass="verse-pane">
+              <children>
+                <Label fx:id="labelVerse21" styleClass="verse-index" text="21" />
+                <Button fx:id="playButtonVerse21" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                <Label fx:id="textVerse21" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="16.0" vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </VBox>
       </content>
     </ScrollPane>
-      <AnchorPane id="panePlayer" GridPane.rowIndex="1">
-         <children>
-          <Button id="buttonPlay" mnemonicParsing="false" prefWidth="32" styleClass="play-button" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="21.0" />
-          <Slider id="sliderPlayProgress" styleClass="slider" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
-          <Label id="labelPlayProgress" text="00:00 / 03:45" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0" />
-         </children>
-      </AnchorPane>
-   </children>
+    <AnchorPane fx:id="panePlayer" GridPane.rowIndex="1">
+      <children>
+        <Button fx:id="buttonPlay" mnemonicParsing="false" prefWidth="32.0" styleClass="play-button" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="21.0" />
+        <Slider fx:id="sliderPlayProgress" styleClass="slider" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+        <Label fx:id="labelPlayProgress" text="00:00 / 03:45" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0" />
+      </children>
+    </AnchorPane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    <ColumnConstraints hgrow="NEVER" minWidth="300.0" prefWidth="300.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="75.0" prefHeight="75.0" vgrow="NEVER" />
+  </rowConstraints>
 </GridPane>

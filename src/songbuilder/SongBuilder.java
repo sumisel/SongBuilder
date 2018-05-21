@@ -17,11 +17,17 @@
  */
 package songbuilder;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -32,27 +38,23 @@ import javafx.stage.Stage;
 public class SongBuilder extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+    public void start(Stage stage) throws IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));        
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        // Create the Scene
+        Scene scene = new Scene(root);
+        String css = this.getClass().getResource("main.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        // Set the Scene to the Stage
+        stage.setScene(scene);
+        // Set the Title to the Stage
+        stage.setTitle("Unterschleißheim Song");
+        stage.getIcons().add(new Image("/res/logo.png"));
+        // Display the Stage
+        stage.show();
     }
-
+    
     /**
      * @param args the command line arguments
      */
