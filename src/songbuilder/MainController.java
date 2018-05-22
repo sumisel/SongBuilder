@@ -31,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -39,6 +40,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -57,6 +59,8 @@ public class MainController implements Initializable {
     
     @FXML
     private Button buttonPlay;
+    @FXML
+    private Slider sliderPlayProgress;
     @FXML
     private Label labelPlayProgress;
     
@@ -310,42 +314,37 @@ public class MainController implements Initializable {
     }
     
     private void addDragSource(GridPane source) {
-        source.setOnDragDetected(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                /* drag was detected, start a drag-and-drop gesture*/
-                /* allow any transfer mode */
-                Dragboard db = source.startDragAndDrop(TransferMode.COPY.ANY);
-        
-                /* Put a string on a dragboard */
-                ClipboardContent content = new ClipboardContent();
-                content.putString(((Label) source.getChildren().get(0)).getText());
-                content.putHtml(((Label) source.getChildren().get(2)).getText());
-                
-                db.setContent(content);
-        
-                event.consume();
-            }
+        source.setOnDragDetected((MouseEvent event) -> {
+            /* drag was detected, start a drag-and-drop gesture*/
+            /* allow any transfer mode */
+            Dragboard db = source.startDragAndDrop(TransferMode.COPY.ANY);
+            
+            /* Put a string on a dragboard */
+            ClipboardContent content = new ClipboardContent();
+            content.putString(((Label) source.getChildren().get(0)).getText());
+            content.putHtml(((Label) source.getChildren().get(2)).getText());
+            
+            db.setContent(content);
+            
+            event.consume();
         });
     }
     
     private void addDropTarget(GridPane target) {
-        target.setOnDragOver(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                /* data is dragged over the target */
-                /* accept it only if it is not dragged from the same node 
-                 * and if it has a string data */
-                if (event.getGestureSource() != target &&
+        target.setOnDragOver((DragEvent event) -> {
+            /* data is dragged over the target */
+            /* accept it only if it is not dragged from the same node
+            * and if it has a string data */
+            if (event.getGestureSource() != target &&
                     event.getDragboard().hasString()) {
-                        /* allow for both copying and moving, whatever user chooses */
-                        event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                    }
+                /* allow for both copying and moving, whatever user chooses */
+                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+            }
+            
+            event.consume();
+        });
         
-                    event.consume();
-                }
-            });
-        
-        target.setOnDragDropped(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
+        target.setOnDragDropped((DragEvent event) -> {
             /* data dropped */
             /* if there is a string data on dragboard, read it and use it */
             Dragboard db = event.getDragboard();
@@ -366,26 +365,23 @@ public class MainController implements Initializable {
                 
                 success = true;
             }
-            /* let the source know whether the string was successfully 
+            /* let the source know whether the string was successfully
             * transferred and used */
             event.setDropCompleted(success);
         
             event.consume();
-            }
         });
         
         
-        target.setOnDragEntered(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                /* the drag-and-drop gesture entered the target */
-                /* show to the user that it is an actual gesture target */
-                if (event.getGestureSource() != target &&
-                 event.getDragboard().hasString()) {
-                    // nothing implemented here
-                }
-                
-                event.consume();
+        target.setOnDragEntered((DragEvent event) -> {
+            /* the drag-and-drop gesture entered the target */
+            /* show to the user that it is an actual gesture target */
+            if (event.getGestureSource() != target &&
+                    event.getDragboard().hasString()) {
+                // nothing implemented here
             }
+            
+            event.consume();
         });
     }
         
@@ -422,8 +418,8 @@ public class MainController implements Initializable {
     }
     
     private void initPlayer() {
-        for(int i=0; i<song.length; i++) {
-            if(song[i].equals("")) {
+        for (String songVerse : song) {
+            if (songVerse.equals("")) {
                 songComplete = false;
                 break;
             }
@@ -457,11 +453,8 @@ public class MainController implements Initializable {
             }
 
             int length = (int)((appendedFiles.getFrameLength())/(appendedFiles.getFormat().getFrameRate()));
-            String seconds = ""+(length%60);
-            seconds = seconds.length()==1 ? "0"+seconds : seconds;
-            String minutes = ""+(length/60);
-            minutes = minutes.length()==1 ? "0"+minutes : minutes;
-            labelPlayProgress.setText(minutes+":"+seconds);
+            updatePlayerLabel(length, 0);
+            sliderPlayProgress.setMax(length);
 
             AudioSystem.write(appendedFiles, 
                             AudioFileFormat.Type.WAVE,
@@ -473,6 +466,7 @@ public class MainController implements Initializable {
         
         final Media media = new Media((new File(System.getProperty("user.dir")+"\\src\\res\\song.wav")).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        
         buttonPlay.setOnAction(e ->{
             if(buttonPlay.getStyleClass().size()>2) {
                 mediaPlayer.pause();
@@ -483,7 +477,35 @@ public class MainController implements Initializable {
             }
         });
         
-        //TODO init progress bar
+        // connect media player with slider and label slider
+        mediaPlayer.currentTimeProperty().addListener(ov -> {
+            sliderPlayProgress.setValue(mediaPlayer.getCurrentTime().toSeconds());
+            updatePlayerLabel((int) sliderPlayProgress.getMax(), (int) mediaPlayer.getCurrentTime().toSeconds());
+        });
+        sliderPlayProgress.setOnMouseClicked((MouseEvent mouseEvent) -> {
+            MediaPlayer.Status status = mediaPlayer.getStatus();
+            mediaPlayer.pause();
+            System.out.println("songbuilder.MainController.initPlayer() "+Duration.seconds(sliderPlayProgress.getValue()));
+            mediaPlayer.seek(Duration.seconds(sliderPlayProgress.getValue()));
+            updatePlayerLabel((int) sliderPlayProgress.getMax(), (int) Duration.seconds(sliderPlayProgress.getValue()).toSeconds());
+            if(status == MediaPlayer.Status.PLAYING) {
+                mediaPlayer.play();
+            }
+        });
+    }
+    
+    private void updatePlayerLabel(int length, int current) {
+        String secondsMax = ""+(length%60);
+        secondsMax = secondsMax.length()==1 ? "0"+secondsMax : secondsMax;
+        String minutesMax = ""+(length/60);
+        minutesMax = minutesMax.length()==1 ? "0"+minutesMax : minutesMax;
+        
+        String secondsCur = ""+(current%60);
+        secondsCur = secondsCur.length()==1 ? "0"+secondsCur : secondsCur;
+        String minutesCur = ""+(current/60);
+        minutesCur = minutesCur.length()==1 ? "0"+minutesCur : minutesCur;
+        
+        labelPlayProgress.setText(minutesCur+":"+secondsCur + " / " + minutesMax+":"+secondsMax);
     }
     
     private int getNextSongSlot(int index) {
