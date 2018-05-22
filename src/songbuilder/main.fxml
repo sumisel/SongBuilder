@@ -445,7 +445,7 @@
                 <RowConstraints vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane fx:id="paneVerse18" prefHeight="150.0" styleClass="verse-pane">
+            <GridPane fx:id="paneVerse18" prefHeight="175.0" styleClass="verse-pane">
               <children>
                 <Label fx:id="labelVerse18" styleClass="verse-index" text="18" />
                 <Button fx:id="playButtonVerse18" minHeight="16.0" minWidth="16.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="16.0" styleClass="play-button-small" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />

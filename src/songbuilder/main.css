@@ -3,7 +3,9 @@
 }
 
 .label {
-    -fx-font-size: 18;
+    -fx-font-size: 32;
+    -fx-font-family: "JasmineUPC";
+    -fx-text-fill: #333333;
 }
 
 
@@ -46,6 +48,10 @@
     -fx-border-width: 2;
 }
 
+#labelPlayProgress{
+    -fx-font-size: 24;
+}
+
 #logo {
     -fx-background-image: url("../res/logo.png");
     -fx-alignment: center;
@@ -73,7 +79,7 @@
 }
 
 .verse-index{
-    -fx-font-size: 20;
+    -fx-font-size: 32;
     -fx-font-weight: bold;
 }
 
@@ -102,7 +108,7 @@
 
 .headline {
     -fx-padding: 10;
-    -fx-font-size: 40;
+    -fx-font-size: 60;
     -fx-font-weight: bold;
 }
 

@@ -18,8 +18,10 @@
 package songbuilder;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.SequenceInputStream;
@@ -378,12 +380,25 @@ public class MainController implements Initializable {
                 File dest = fileChooser.showSaveDialog(SongBuilder.getStage());
                 if (dest != null) {
                     try {
+                        if(dest.exists()) {
+                            dest.delete();
+                        }
                         Files.copy(file.toPath(), dest.toPath());
                     } catch (IOException ex) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    //TODO clear GUI
-                    //TODO save for statistics
+                    
+                    // save for statistics
+                    StringJoiner joiner = new StringJoiner(", ");
+                    for(String elem : song) {
+                        joiner.add(elem);
+                    }
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"\\src\\res\\stats.txt", true))) {
+                        bw.write(joiner.toString());
+                        bw.newLine();
+                    } catch (IOException f) {
+                        f.printStackTrace();
+                    }
                 }
             }
         });
@@ -486,7 +501,6 @@ public class MainController implements Initializable {
         sliderPlayProgress.setOnMouseClicked((MouseEvent mouseEvent) -> {
             MediaPlayer.Status status = mediaPlayer.getStatus();
             mediaPlayer.pause();
-            System.out.println("songbuilder.MainController.initPlayer() "+Duration.seconds(sliderPlayProgress.getValue()));
             mediaPlayer.seek(Duration.seconds(sliderPlayProgress.getValue()));
             updatePlayerLabel((int) sliderPlayProgress.getMax(), (int) Duration.seconds(sliderPlayProgress.getValue()).toSeconds());
             if(status == MediaPlayer.Status.PLAYING) {
