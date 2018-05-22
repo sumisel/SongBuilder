@@ -91,8 +91,8 @@
     -fx-background-position: 50%;
 }
 
-.play-button-small.pause {
-    -fx-background-image: url("../res/pause_16.png");
+.play-button-small.stop {
+    -fx-background-image: url("../res/stop_16.png");
     -fx-background-color: greenyellow;
 }
 

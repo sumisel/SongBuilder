@@ -48,6 +48,7 @@ public class SongBuilder extends Application {
         // Set the Title to the Stage
         stage.setTitle("Unterschleißheim Song");
         stage.getIcons().add(new Image("/res/logo.png"));
+        stage.setMaximized(true);
         // Display the Stage
         stage.show();
     }

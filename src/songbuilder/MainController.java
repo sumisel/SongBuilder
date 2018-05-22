@@ -32,10 +32,13 @@ import java.util.StringJoiner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.ClipboardContent;
@@ -370,9 +373,16 @@ public class MainController implements Initializable {
         // save button
         buttonSave.setOnAction((final ActionEvent e) -> {
             if(songComplete) {
+                if(!(new File("E:\\\\").exists())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+                    alert.setHeaderText("Bitte USB-Stick verbinden.");
+                    alert.setTitle("");
+                    alert.showAndWait();
+                    return;
+                }
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Speicher dein Lied");
-                fileChooser.setInitialDirectory(new File("C:\\\\"));
+                fileChooser.setInitialDirectory(new File("E:\\\\"));
                 fileChooser.setInitialFileName("Mein Unterschleißheim Lied");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("WAV files (*.wav)", "*.wav"));
 
@@ -454,7 +464,7 @@ public class MainController implements Initializable {
                             new AudioInputStream(
                                 new SequenceInputStream(clipIntro, clipNext),     
                                 clipIntro.getFormat(), 
-                                clipIntro.getFrameLength() + clipNext.getFrameLength());
+                                clipIntro.getFrameLength() + clipNext.getFrameLength() -5000);
             
             while(index < song.length) {
                 index = getNextSongSlot(index);
@@ -465,7 +475,7 @@ public class MainController implements Initializable {
                             new AudioInputStream(
                                 new SequenceInputStream(appendedFiles, clipNext),     
                                 appendedFiles.getFormat(), 
-                                appendedFiles.getFrameLength() + clipNext.getFrameLength());
+                                appendedFiles.getFrameLength() + clipNext.getFrameLength() -5000);
             }
 
             int length = (int)((appendedFiles.getFrameLength())/(appendedFiles.getFormat().getFrameRate()));
@@ -498,7 +508,7 @@ public class MainController implements Initializable {
             sliderPlayProgress.setValue(mediaPlayer.getCurrentTime().toSeconds());
             updatePlayerLabel((int) sliderPlayProgress.getMax(), (int) mediaPlayer.getCurrentTime().toSeconds());
         });
-        sliderPlayProgress.setOnMouseClicked((MouseEvent mouseEvent) -> {
+        EventHandler handler = (EventHandler) (Event event) -> {
             MediaPlayer.Status status = mediaPlayer.getStatus();
             mediaPlayer.pause();
             mediaPlayer.seek(Duration.seconds(sliderPlayProgress.getValue()));
@@ -506,7 +516,9 @@ public class MainController implements Initializable {
             if(status == MediaPlayer.Status.PLAYING) {
                 mediaPlayer.play();
             }
-        });
+        };
+        sliderPlayProgress.setOnMousePressed(handler);
+        sliderPlayProgress.setOnMouseDragged(handler);
     }
     
     private void updatePlayerLabel(int length, int current) {
@@ -535,8 +547,13 @@ public class MainController implements Initializable {
         final Media media = new Media((new File(res)).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         button.setOnAction(e ->{
-            mediaPlayer.stop();
-            mediaPlayer.play();
+            if(mediaPlayer.getStatus()==MediaPlayer.Status.PLAYING) {
+                mediaPlayer.stop();
+                button.getStyleClass().remove(2);
+            } else {
+                button.getStyleClass().add("stop");
+                mediaPlayer.play();
+            }
         });
     }
     
