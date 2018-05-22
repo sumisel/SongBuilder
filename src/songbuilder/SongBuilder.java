@@ -17,18 +17,12 @@
  */
 package songbuilder;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -37,10 +31,13 @@ import javafx.stage.Stage;
  */
 public class SongBuilder extends Application {
     
+    private static Stage stage;
+    
     @Override
     public void start(Stage stage) throws IOException
     {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));        
+        this.stage = stage;
         
         // Create the Scene
         Scene scene = new Scene(root);
@@ -60,6 +57,10 @@ public class SongBuilder extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public static Stage getStage() {
+        return stage;
     }
     
 }

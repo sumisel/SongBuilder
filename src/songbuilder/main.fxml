@@ -16,7 +16,7 @@
         <GridPane>
           <children>
             <Label styleClass="headline" text="Dein Unterschleißheim Lied" />
-            <Button fx:id="buttonSave" minHeight="32.0" minWidth="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="save-button" GridPane.columnIndex="1" />
+            <Button fx:id="buttonSave" minHeight="32.0" minWidth="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="save-button, disabled" GridPane.columnIndex="1" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />

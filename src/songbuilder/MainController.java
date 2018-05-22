@@ -24,8 +24,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.SequenceInputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ResourceBundle;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,6 +44,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -229,32 +234,6 @@ public class MainController implements Initializable {
     @FXML
     private GridPane paneSlot6;
     
-    @FXML
-    private Label labelVerse1;
-    @FXML
-    private Label labelVerse2;
-    @FXML
-    private Label labelVerse3;
-    @FXML
-    private Label labelVerse4;
-    @FXML
-    private Label labelVerse5;
-    @FXML
-    private Label labelVerse6;
-    
-    @FXML
-    private Label textVerse1;
-    @FXML
-    private Label textVerse2;
-    @FXML
-    private Label textVerse3;
-    @FXML
-    private Label textVerse4;
-    @FXML
-    private Label textVerse5;
-    @FXML
-    private Label textVerse6;
-    
     
     
     /**
@@ -387,7 +366,27 @@ public class MainController implements Initializable {
         
     private void initButtons() {
         // save button
-        //TODO file chooser and save wav
+        buttonSave.setOnAction((final ActionEvent e) -> {
+            if(songComplete) {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Speicher dein Lied");
+                fileChooser.setInitialDirectory(new File("C:\\\\"));
+                fileChooser.setInitialFileName("Mein Unterschleißheim Lied");
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("WAV files (*.wav)", "*.wav"));
+
+                File file = new File(System.getProperty("user.dir")+"\\src\\res\\song.wav");
+                File dest = fileChooser.showSaveDialog(SongBuilder.getStage());
+                if (dest != null) {
+                    try {
+                        Files.copy(file.toPath(), dest.toPath());
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    //TODO clear GUI
+                    //TODO save for statistics
+                }
+            }
+        });
         
         setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\01.wav");
         setOnPlay(playButtonVerse02, System.getProperty("user.dir")+"\\src\\res\\02.wav");
@@ -420,9 +419,11 @@ public class MainController implements Initializable {
     private void initPlayer() {
         for (String songVerse : song) {
             if (songVerse.equals("")) {
+                buttonSave.getStyleClass().set(2, "disabled");
                 songComplete = false;
                 break;
             }
+            buttonSave.getStyleClass().set(2, "a");
             songComplete = true;
         }
                 

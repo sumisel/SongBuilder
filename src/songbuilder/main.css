@@ -110,6 +110,9 @@
     -fx-background-image: url("../res/save_32.png");
     -fx-background-color: transparent;
 }
+.save-button.disabled {
+    -fx-opacity: 0.2;
+}
 
 .verse-slot {
     -fx-padding: 10;
