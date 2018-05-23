@@ -41,6 +41,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -338,14 +339,15 @@ public class MainController implements Initializable {
                     target.getStyleClass().remove(1);
                 }
                 
-                ((Label) target.getChildren().get(0)).setText(db.getString());
-                ((Label) target.getChildren().get(2)).setText(db.getHtml());
-                setOnPlay(((Button) target.getChildren().get(1)), System.getProperty("user.dir")+"\\src\\res\\"+db.getString()+".wav");
-                
                 int index = Integer.parseInt(target.getId().replaceAll("[^0-9]+", ""));
                 index += (index-1)/2;
                 song[index] = db.getString();
                 initPlayer();
+                
+                ((Label) target.getChildren().get(0)).setText(db.getString());
+                ((Label) target.getChildren().get(2)).setText(db.getHtml());
+                setOnPlay(((Button) target.getChildren().get(1)), System.getProperty("user.dir")+"\\src\\res\\"+db.getString()+".wav", "Strophe abspielen");
+                setOnRemove(((Button) target.getChildren().get(3)), index, "Strophe entfernen");
                 
                 success = true;
             }
@@ -371,6 +373,7 @@ public class MainController implements Initializable {
         
     private void initButtons() {
         // save button
+        buttonSave.setTooltip(new Tooltip("Song speichern"));
         buttonSave.setOnAction((final ActionEvent e) -> {
             if(songComplete) {
                 if(!(new File("E:\\\\").exists())) {
@@ -413,32 +416,17 @@ public class MainController implements Initializable {
             }
         });
         
-        setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\01.wav");
-        setOnPlay(playButtonVerse02, System.getProperty("user.dir")+"\\src\\res\\02.wav");
-        setOnPlay(playButtonVerse03, System.getProperty("user.dir")+"\\src\\res\\03.wav");
-        setOnPlay(playButtonVerse04, System.getProperty("user.dir")+"\\src\\res\\04.wav");
-        setOnPlay(playButtonVerse05, System.getProperty("user.dir")+"\\src\\res\\05.wav");
-        setOnPlay(playButtonVerse06, System.getProperty("user.dir")+"\\src\\res\\06.wav");
-        setOnPlay(playButtonVerse07, System.getProperty("user.dir")+"\\src\\res\\07.wav");
-        setOnPlay(playButtonVerse08, System.getProperty("user.dir")+"\\src\\res\\08.wav");
-        setOnPlay(playButtonVerse09, System.getProperty("user.dir")+"\\src\\res\\09.wav");
-        setOnPlay(playButtonVerse10, System.getProperty("user.dir")+"\\src\\res\\10.wav");
-        setOnPlay(playButtonVerse11, System.getProperty("user.dir")+"\\src\\res\\11.wav");
-        setOnPlay(playButtonVerse12, System.getProperty("user.dir")+"\\src\\res\\12.wav");
-        setOnPlay(playButtonVerse13, System.getProperty("user.dir")+"\\src\\res\\13.wav");
-        setOnPlay(playButtonVerse14, System.getProperty("user.dir")+"\\src\\res\\14.wav");
-        setOnPlay(playButtonVerse15, System.getProperty("user.dir")+"\\src\\res\\15.wav");
-        setOnPlay(playButtonVerse16, System.getProperty("user.dir")+"\\src\\res\\16.wav");
-        setOnPlay(playButtonVerse17, System.getProperty("user.dir")+"\\src\\res\\17.wav");
-        setOnPlay(playButtonVerse18, System.getProperty("user.dir")+"\\src\\res\\18.wav");
-        setOnPlay(playButtonVerse19, System.getProperty("user.dir")+"\\src\\res\\19.wav");
-        setOnPlay(playButtonVerse20, System.getProperty("user.dir")+"\\src\\res\\20.wav");
-        setOnPlay(playButtonVerse21, System.getProperty("user.dir")+"\\src\\res\\21.wav");
+        for(int i=1; i<10; i++) {
+            setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\0"+i+".wav", "Strophe abspielen");
+        }
+        for(int i=10; i<12; i++) {
+            setOnPlay(playButtonVerse11, System.getProperty("user.dir")+"\\src\\res\\"+i+".wav", "Strophe abspielen");
+        }
 
-        setOnPlay(playButtonIntro, System.getProperty("user.dir")+"\\src\\res\\intro.wav");
-        setOnPlay(playButtonRefrain1, System.getProperty("user.dir")+"\\src\\res\\refrain1.wav");
-        setOnPlay(playButtonRefrain2, System.getProperty("user.dir")+"\\src\\res\\refrain2.wav");
-        setOnPlay(playButtonRefrain3, System.getProperty("user.dir")+"\\src\\res\\refrain3.wav");
+        setOnPlay(playButtonIntro, System.getProperty("user.dir")+"\\src\\res\\intro.wav", "Intro abspielen");
+        for(int i=1; i<4; i++) {
+            setOnPlay(playButtonRefrain1, System.getProperty("user.dir")+"\\src\\res\\refrain"+i+".wav", "Refrain abspielen");
+        }
     }
     
     private void initPlayer() {
@@ -493,6 +481,7 @@ public class MainController implements Initializable {
         final Media media = new Media((new File(System.getProperty("user.dir")+"\\src\\res\\song.wav")).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         
+        buttonPlay.setTooltip(new Tooltip("Song abspielen"));
         buttonPlay.setOnAction(e ->{
             if(buttonPlay.getStyleClass().size()>2) {
                 mediaPlayer.pause();
@@ -518,7 +507,7 @@ public class MainController implements Initializable {
             }
         };
         sliderPlayProgress.setOnMousePressed(handler);
-        sliderPlayProgress.setOnMouseDragged(handler);
+        //sliderPlayProgress.setOnMouseDragged(handler);
     }
     
     private void updatePlayerLabel(int length, int current) {
@@ -543,10 +532,15 @@ public class MainController implements Initializable {
         return index;
     }
     
+    private void setOnPlay(Button button, String res, String tooltip) {
+        button.setTooltip(new Tooltip(tooltip));
+        setOnPlay(button, res);
+    }
+    
     private void setOnPlay(Button button, String res) {
         final Media media = new Media((new File(res)).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
-        button.setOnAction(e ->{
+        button.setOnAction(e -> {
             if(mediaPlayer.getStatus()==MediaPlayer.Status.PLAYING) {
                 mediaPlayer.stop();
                 button.getStyleClass().remove(2);
@@ -600,5 +594,17 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         return content;
+    }
+
+    private void setOnRemove(Button button, int index, String tooltip) {
+        button.setTooltip(new Tooltip(tooltip));
+        button.setOnAction(e -> {
+            song[index] = "";
+            ((Label) ((GridPane) button.getParent()).getChildren().get(0)).setText("");
+            ((Label) ((GridPane) button.getParent()).getChildren().get(2)).setText("");
+            ((Button) ((GridPane) button.getParent()).getChildren().get(1)).setOnAction(null);
+            ((GridPane) button.getParent()).getStyleClass().add("empty");
+            initPlayer();
+        });
     }
 }

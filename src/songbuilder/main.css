@@ -96,6 +96,14 @@
     -fx-background-color: greenyellow;
 }
 
+.remove-button-small {
+    -fx-background-image: url("../res/remove_16.png");
+    -fx-background-color: lightgray;
+    -fx-background-radius: 16;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
 
 /*
  * main song pane elements
@@ -110,6 +118,14 @@
     -fx-padding: 10;
     -fx-font-size: 60;
     -fx-font-weight: bold;
+}
+
+#logoHF {
+    -fx-graphic: url("../res/logo_hf_100.png");
+}
+
+#logoPLR {
+    -fx-graphic: url("../res/logo_plr_100.png");
 }
 
 .save-button {
