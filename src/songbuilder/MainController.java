@@ -335,8 +335,10 @@ public class MainController implements Initializable {
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasString()) {
-                if(target.getStyleClass().size()>1) {
-                    target.getStyleClass().remove(1);
+                for(int i=target.getStyleClass().size()-1; i>=0; i--) {
+                    if(target.getStyleClass().get(i).equals("empty")) {
+                        target.getStyleClass().remove(i);
+                    }
                 }
                 
                 int index = Integer.parseInt(target.getId().replaceAll("[^0-9]+", ""));
@@ -483,9 +485,16 @@ public class MainController implements Initializable {
         
         buttonPlay.setTooltip(new Tooltip("Song abspielen"));
         buttonPlay.setOnAction(e ->{
-            if(buttonPlay.getStyleClass().size()>2) {
+            boolean playing = false;
+            for(int i=buttonPlay.getStyleClass().size()-1; i>=0; i--) {
+                if(buttonPlay.getStyleClass().get(i).equals("pause")) {
+                    playing = true;
+                    buttonPlay.getStyleClass().remove(i);
+                }
+            }
+            
+            if(playing) {
                 mediaPlayer.pause();
-                buttonPlay.getStyleClass().remove(2);
             } else {
                 mediaPlayer.play();
                 buttonPlay.getStyleClass().add("pause");
@@ -541,12 +550,19 @@ public class MainController implements Initializable {
         final Media media = new Media((new File(res)).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
         button.setOnAction(e -> {
-            if(mediaPlayer.getStatus()==MediaPlayer.Status.PLAYING) {
-                mediaPlayer.stop();
-                button.getStyleClass().remove(2);
+            boolean playing = false;
+            for(int i=button.getStyleClass().size()-1; i>=0; i--) {
+                if(button.getStyleClass().get(i).equals("stop")) {
+                    playing = true;
+                    button.getStyleClass().remove(i);
+                }
+            }
+            
+            if(playing) {
+                mediaPlayer.pause();
             } else {
-                button.getStyleClass().add("stop");
                 mediaPlayer.play();
+                button.getStyleClass().add("stop");
             }
         });
     }
