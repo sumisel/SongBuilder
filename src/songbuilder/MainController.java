@@ -17,14 +17,15 @@
  */
 package songbuilder;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.SequenceInputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ResourceBundle;
@@ -63,8 +64,9 @@ import javax.sound.sampled.AudioSystem;
  */
 public class MainController implements Initializable {
 
-    private String[] song = new String[10];
+    private final String[] song = new String[10];
     private boolean songComplete = false;
+    private AudioInputStream songStream = null;
 
     // ugly code :(
     
@@ -244,6 +246,8 @@ public class MainController implements Initializable {
     
     /**
      * Initialises the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -348,7 +352,7 @@ public class MainController implements Initializable {
                 
                 ((Label) target.getChildren().get(0)).setText(db.getString());
                 ((Label) target.getChildren().get(2)).setText(db.getHtml());
-                setOnPlay(((Button) target.getChildren().get(1)), System.getProperty("user.dir")+"\\src\\res\\"+db.getString()+".wav", "Strophe abspielen");
+                setOnPlay(((Button) target.getChildren().get(1)), "/res/"+db.getString()+".wav", "Strophe abspielen");
                 setOnRemove(((Button) target.getChildren().get(3)), index, "Strophe entfernen");
                 
                 success = true;
@@ -378,37 +382,37 @@ public class MainController implements Initializable {
         buttonSave.setTooltip(new Tooltip("Song speichern"));
         buttonSave.setOnAction((final ActionEvent e) -> {
             if(songComplete) {
-                if(!(new File("E:\\\\").exists())) {
+                /*if(!(new File("C:\\\\").exists())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
                     alert.setHeaderText("Bitte USB-Stick verbinden.");
                     alert.setTitle("");
                     alert.showAndWait();
                     return;
-                }
+                }*/
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Speicher dein Lied");
-                fileChooser.setInitialDirectory(new File("E:\\\\"));
+                fileChooser.setInitialDirectory(new File("C:\\\\"));
                 fileChooser.setInitialFileName("Mein Unterschleißheim Lied");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("WAV files (*.wav)", "*.wav"));
 
-                File file = new File(System.getProperty("user.dir")+"\\src\\res\\song.wav");
                 File dest = fileChooser.showSaveDialog(SongBuilder.getStage());
                 if (dest != null) {
                     try {
                         if(dest.exists()) {
                             dest.delete();
                         }
+                        File file = new File(System.getProperty("user.dir")+"\\song.wav");
                         Files.copy(file.toPath(), dest.toPath());
                     } catch (IOException ex) {
-                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     // save for statistics
                     StringJoiner joiner = new StringJoiner(", ");
                     for(String elem : song) {
                         joiner.add(elem);
-                    }
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"\\src\\res\\stats.txt", true))) {
+                    }//getClass().getResourceAsStream("/res/stats.txt")
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+"\\stats.txt", true))) {
                         bw.write(joiner.toString());
                         bw.newLine();
                     } catch (IOException f) {
@@ -418,17 +422,32 @@ public class MainController implements Initializable {
             }
         });
         
-        for(int i=1; i<10; i++) {
-            setOnPlay(playButtonVerse01, System.getProperty("user.dir")+"\\src\\res\\0"+i+".wav", "Strophe abspielen");
-        }
-        for(int i=10; i<12; i++) {
-            setOnPlay(playButtonVerse11, System.getProperty("user.dir")+"\\src\\res\\"+i+".wav", "Strophe abspielen");
-        }
+        setOnPlay(playButtonVerse01, "/res/01.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse02, "/res/02.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse03, "/res/03.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse04, "/res/04.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse05, "/res/05.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse06, "/res/06.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse07, "/res/07.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse08, "/res/08.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse09, "/res/09.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse10, "/res/10.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse11, "/res/11.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse12, "/res/12.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse13, "/res/13.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse14, "/res/14.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse15, "/res/15.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse16, "/res/16.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse17, "/res/17.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse18, "/res/18.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse19, "/res/19.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse20, "/res/20.wav", "Strophe abspielen");
+        setOnPlay(playButtonVerse21, "/res/21.wav", "Strophe abspielen");
 
-        setOnPlay(playButtonIntro, System.getProperty("user.dir")+"\\src\\res\\intro.wav", "Intro abspielen");
-        for(int i=1; i<4; i++) {
-            setOnPlay(playButtonRefrain1, System.getProperty("user.dir")+"\\src\\res\\refrain"+i+".wav", "Refrain abspielen");
-        }
+        setOnPlay(playButtonIntro, "/res/intro.wav", "Intro abspielen");
+        setOnPlay(playButtonRefrain1, "/res/refrain1.wav", "Refrain abspielen");
+        setOnPlay(playButtonRefrain2, "/res/refrain2.wav", "Refrain abspielen");
+        setOnPlay(playButtonRefrain3, "/res/refrain3.wav", "Refrain abspielen");
     }
     
     private void initPlayer() {
@@ -443,14 +462,14 @@ public class MainController implements Initializable {
         }
                 
         try {
-            AudioInputStream clipIntro = AudioSystem.getAudioInputStream(new File(System.getProperty("user.dir")+"\\src\\res\\"+song[0]+".wav"));
+            AudioInputStream clipIntro = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/res/"+song[0]+".wav")));
             
             int index = 1;
             index = getNextSongSlot(index);
-            AudioInputStream clipNext = AudioSystem.getAudioInputStream(new File(System.getProperty("user.dir")+"\\src\\res\\"+song[index]+".wav"));
+            AudioInputStream clipNext = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream("/res/"+song[index]+".wav")));
             index++;
 
-            AudioInputStream appendedFiles = 
+            songStream = 
                             new AudioInputStream(
                                 new SequenceInputStream(clipIntro, clipNext),     
                                 clipIntro.getFormat(), 
@@ -458,31 +477,31 @@ public class MainController implements Initializable {
             
             while(index < song.length) {
                 index = getNextSongSlot(index);
-                clipNext = AudioSystem.getAudioInputStream(new File(System.getProperty("user.dir")+"\\src\\res\\"+song[index]+".wav"));
+                clipNext = AudioSystem.getAudioInputStream(new BufferedInputStream(getClass().getResourceAsStream(("/res/"+song[index]+".wav"))));
                 index++;
 
-                appendedFiles = 
+                songStream = 
                             new AudioInputStream(
-                                new SequenceInputStream(appendedFiles, clipNext),     
-                                appendedFiles.getFormat(), 
-                                appendedFiles.getFrameLength() + clipNext.getFrameLength() -5000);
+                                new SequenceInputStream(songStream, clipNext),     
+                                songStream.getFormat(), 
+                                songStream.getFrameLength() + clipNext.getFrameLength() -5000);
             }
 
-            int length = (int)((appendedFiles.getFrameLength())/(appendedFiles.getFormat().getFrameRate()));
+            int length = (int)((songStream.getFrameLength())/(songStream.getFormat().getFrameRate()));
             updatePlayerLabel(length, 0);
             sliderPlayProgress.setMax(length);
 
-            AudioSystem.write(appendedFiles, 
+            AudioSystem.write(songStream, 
                             AudioFileFormat.Type.WAVE,
-                            new File(System.getProperty("user.dir")+"\\src\\res\\song.wav"));
+                            new File(System.getProperty("user.dir")+"\\song.wav"));
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        
-        final Media media = new Media((new File(System.getProperty("user.dir")+"\\src\\res\\song.wav")).toURI().toString());
+        final Media media;
+        media = new Media((new File(System.getProperty("user.dir")+"\\song.wav")).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
-        
+
         buttonPlay.setTooltip(new Tooltip("Song abspielen"));
         buttonPlay.setOnAction(e ->{
             boolean playing = false;
@@ -492,7 +511,7 @@ public class MainController implements Initializable {
                     buttonPlay.getStyleClass().remove(i);
                 }
             }
-            
+
             if(playing) {
                 mediaPlayer.pause();
             } else {
@@ -500,7 +519,7 @@ public class MainController implements Initializable {
                 buttonPlay.getStyleClass().add("pause");
             }
         });
-        
+
         // connect media player with slider and label slider
         mediaPlayer.currentTimeProperty().addListener(ov -> {
             sliderPlayProgress.setValue(mediaPlayer.getCurrentTime().toSeconds());
@@ -547,67 +566,73 @@ public class MainController implements Initializable {
     }
     
     private void setOnPlay(Button button, String res) {
-        final Media media = new Media((new File(res)).toURI().toString());
-        final MediaPlayer mediaPlayer = new MediaPlayer(media);
-        button.setOnAction(e -> {
-            boolean playing = false;
-            for(int i=button.getStyleClass().size()-1; i>=0; i--) {
-                if(button.getStyleClass().get(i).equals("stop")) {
-                    playing = true;
-                    button.getStyleClass().remove(i);
+        final Media media;
+        try {
+            media = new Media(getClass().getResource(res).toURI().toString());
+            final MediaPlayer mediaPlayer = new MediaPlayer(media);
+            button.setOnAction(e -> {
+                boolean playing = false;
+                for(int i=button.getStyleClass().size()-1; i>=0; i--) {
+                    if(button.getStyleClass().get(i).equals("stop")) {
+                        playing = true;
+                        button.getStyleClass().remove(i);
+                    }
                 }
-            }
             
-            if(playing) {
-                mediaPlayer.pause();
-            } else {
-                mediaPlayer.play();
-                button.getStyleClass().add("stop");
-            }
-        });
+                if(playing) {
+                    mediaPlayer.pause();
+                } else {
+                    mediaPlayer.play();
+                    button.getStyleClass().add("stop");
+                }
+            });
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void initVerseTexts() {
-        textVerse01.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\01.txt"));
-        textVerse02.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\02.txt"));
-        textVerse03.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\03.txt"));
-        textVerse04.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\04.txt"));
-        textVerse05.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\05.txt"));
-        textVerse06.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\06.txt"));
-        textVerse07.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\07.txt"));
-        textVerse08.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\08.txt"));
-        textVerse09.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\09.txt"));
-        textVerse10.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\10.txt"));
-        textVerse11.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\11.txt"));
-        textVerse12.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\12.txt"));
-        textVerse13.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\13.txt"));
-        textVerse14.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\14.txt"));
-        textVerse15.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\15.txt"));
-        textVerse16.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\16.txt"));
-        textVerse17.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\17.txt"));
-        textVerse18.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\18.txt"));
-        textVerse19.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\19.txt"));
-        textVerse20.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\20.txt"));
-        textVerse21.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\21.txt"));
+        textVerse01.setText(readFile("/res/01.txt"));
+        textVerse02.setText(readFile("/res/02.txt"));
+        textVerse03.setText(readFile("/res/03.txt"));
+        textVerse04.setText(readFile("/res/04.txt"));
+        textVerse05.setText(readFile("/res/05.txt"));
+        textVerse06.setText(readFile("/res/06.txt"));
+        textVerse07.setText(readFile("/res/07.txt"));
+        textVerse08.setText(readFile("/res/08.txt"));
+        textVerse09.setText(readFile("/res/09.txt"));
+        textVerse10.setText(readFile("/res/10.txt"));
+        textVerse11.setText(readFile("/res/11.txt"));
+        textVerse12.setText(readFile("/res/12.txt"));
+        textVerse13.setText(readFile("/res/13.txt"));
+        textVerse14.setText(readFile("/res/14.txt"));
+        textVerse15.setText(readFile("/res/15.txt"));
+        textVerse16.setText(readFile("/res/16.txt"));
+        textVerse17.setText(readFile("/res/17.txt"));
+        textVerse18.setText(readFile("/res/18.txt"));
+        textVerse19.setText(readFile("/res/19.txt"));
+        textVerse20.setText(readFile("/res/20.txt"));
+        textVerse21.setText(readFile("/res/21.txt"));
 
-        textIntro.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\intro.txt"));
-        textRefrain1.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\refrain1.txt"));
-        textRefrain2.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\refrain2.txt"));
-        textRefrain3.setText(readFile(System.getProperty("user.dir")+"\\src\\res\\refrain3.txt"));
+        textIntro.setText(readFile("/res/intro.txt"));
+        textRefrain1.setText(readFile("/res/refrain1.txt"));
+        textRefrain2.setText(readFile("/res/refrain2.txt"));
+        textRefrain3.setText(readFile("/res/refrain3.txt"));
     }
     
     private String readFile(String path) {
         String content = "";
         StringJoiner joiner = new StringJoiner("\n");
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path), "ISO-8859-1"))) {
+        
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(path), "ISO-8859-1"));
             String line;
             while ((line = reader.readLine()) != null) {
                 joiner.add(line);
             }
             content = joiner.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
         return content;
     }
