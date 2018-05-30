@@ -382,16 +382,16 @@ public class MainController implements Initializable {
         buttonSave.setTooltip(new Tooltip("Song speichern"));
         buttonSave.setOnAction((final ActionEvent e) -> {
             if(songComplete) {
-                /*if(!(new File("C:\\\\").exists())) {
+                if(!(new File("E:\\\\").exists())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
                     alert.setHeaderText("Bitte USB-Stick verbinden.");
                     alert.setTitle("");
                     alert.showAndWait();
                     return;
-                }*/
+                }
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Speicher dein Lied");
-                fileChooser.setInitialDirectory(new File("C:\\\\"));
+                fileChooser.setInitialDirectory(new File("E:\\\\"));
                 fileChooser.setInitialFileName("Mein Unterschleißheim Lied");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("WAV files (*.wav)", "*.wav"));
 
@@ -498,8 +498,7 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         
-        final Media media;
-        media = new Media((new File(System.getProperty("user.dir")+"\\song.wav")).toURI().toString());
+        final Media media = new Media((new File(System.getProperty("user.dir")+"\\song.wav")).toURI().toString());
         final MediaPlayer mediaPlayer = new MediaPlayer(media);
 
         buttonPlay.setTooltip(new Tooltip("Song abspielen"));
