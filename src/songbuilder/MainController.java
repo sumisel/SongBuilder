@@ -251,11 +251,11 @@ public class MainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        initSong();
+        initPlayer();
         initVerseTexts();
         initButtons();
         initDragDrop();
-        initSong();
-        initPlayer();
     }
     
     private void initSong() {
@@ -382,16 +382,16 @@ public class MainController implements Initializable {
         buttonSave.setTooltip(new Tooltip("Song speichern"));
         buttonSave.setOnAction((final ActionEvent e) -> {
             if(songComplete) {
-                if(!(new File("E:\\\\").exists())) {
+/*                if(!(new File("E:\\\\").exists())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
                     alert.setHeaderText("Bitte USB-Stick verbinden.");
                     alert.setTitle("");
                     alert.showAndWait();
                     return;
-                }
+                }*/
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Speicher dein Lied");
-                fileChooser.setInitialDirectory(new File("E:\\\\"));
+                fileChooser.setInitialDirectory(new File("C:\\\\"));
                 fileChooser.setInitialFileName("Mein Unterschleißheim Lied");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("WAV files (*.wav)", "*.wav"));
 
